@@ -154,7 +154,6 @@ const PrescriptionAccess = () => {
                         <span className="font-semibold" style={{ color: "#00bfff" }}>
                             {pageTitle}
                         </span>
-                        <span className="text-gray-500 ml-4 font-semibold">Prescription</span>
                     </div>
                     <div className="flex items-center justify-end w-[calc(70%-30px)]">
                         <input
