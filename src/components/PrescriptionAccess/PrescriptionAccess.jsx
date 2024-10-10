@@ -18,7 +18,6 @@ const menuItems = [
     { path: '/teleconsultation', name: 'Teleconsultation Access', icon: <IoIosChatboxes /> },
     { path: '/chats', name: 'Chats', icon: <IoIosChatboxes /> },
     { path: '/bills', name: 'Bills', icon: <RiBillFill /> },
-    { path: '/edit-profile', name: 'Edit Profile', icon: null }
 ];
 
 const PrescriptionAccess = () => {
@@ -154,7 +153,6 @@ const PrescriptionAccess = () => {
                         <span className="font-semibold" style={{ color: "#00bfff" }}>
                             {pageTitle}
                         </span>
-                        <span className="text-gray-500 ml-4 font-semibold">Prescription</span>
                     </div>
                     <div className="flex items-center justify-end w-[calc(70%-30px)]">
                         <input
