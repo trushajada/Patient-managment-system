@@ -14,6 +14,8 @@ import AllAppointments from './components/PatientDashboard/AllAppointments';
 import AllDocument from './components/PatientDashboard/AllDocument';
 import Allprescription from './components/PatientDashboard/Allprescription';
 import AllDiscription from './components/PatientDashboard/AllDiscription';
+import PrescriptionAccess from './components/PrescriptionAccess/PrescriptionAccess';
+import Accessdownload from './components/PrescriptionAccess/Accessdownload';
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path='/documnet' element={<AllDocument/>}></Route>
         <Route path='/allprescription' element={<Allprescription/>}></Route>
         <Route path='/description' element={<AllDiscription/>}></Route>
+        <Route path='/records' element={<PrescriptionAccess/>}></Route>
+        <Route path='/Accessdownload' element={<Accessdownload/>}></Route>
       </Routes>
     </Router>
   );
