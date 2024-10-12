@@ -17,6 +17,13 @@ import AllDiscription from './components/PatientDashboard/AllDiscription';
 import PrescriptionAccess from './components/PrescriptionAccess/PrescriptionAccess';
 import Accessdownload from './components/PrescriptionAccess/Accessdownload';
 import Chat from './components/Chats/Chat';
+import UnpaidBill from './components/Bills/UnpaidBill';
+import BillRecipt from './components/Bills/BillRecipt';
+import Paytype from './components/Bills/Paytype';
+import PayMethod from './components/Bills/PayMethod';
+import PayementDetail from './components/Bills/PayementDetail';
+import Payment from './components/Bills/Payment';
+import PaidBill from './components/Bills/PaidBill';
 
 function App() {
   return (
@@ -39,7 +46,14 @@ function App() {
         <Route path='/records' element={<PrescriptionAccess/>}></Route>
         <Route path='/Accessdownload' element={<Accessdownload/>}></Route>
         <Route path='/chats' element={<Chat/>}></Route>
-      </Routes>
+        <Route path="/bills" element={<UnpaidBill />} />
+        <Route path="/billrecipt" element={<BillRecipt />} />
+        <Route path='/paytype' element={<Paytype/>}></Route>
+        <Route path='/payment-method' element={<PayMethod/>}></Route>
+        <Route path='/payment-detail' element={<PayementDetail/>}></Route>
+        <Route path='/payment' element={<Payment/>}></Route>
+        <Route path="/paidbill" element={<PaidBill />} />
+        </Routes>
     </Router>
   );
 }
