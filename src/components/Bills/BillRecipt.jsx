@@ -73,8 +73,8 @@ const BillRecipt = () => {
     };
 
     const totalAmount = items.reduce((acc, item) => acc + (item.amount * item.qty), 0);
-    const discount = 100; // Sample discount value
-    const tax = 50; // Sample tax value
+    const discount = 100; 
+    const tax = 50; 
     const finalAmount = totalAmount - discount + tax;
 
     return (

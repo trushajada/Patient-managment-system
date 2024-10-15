@@ -24,11 +24,18 @@ import PayMethod from './components/Bills/PayMethod';
 import PayementDetail from './components/Bills/PayementDetail';
 import Payment from './components/Bills/Payment';
 import PaidBill from './components/Bills/PaidBill';
+import AppoinmentManagment from './components/DoctorPannal/AppoinmentManagment';
+import PatientRecordAccess from './components/DoctorPannal/PatientRecordAccess/PatientRecordAccess';
+import PatientRecordView from './components/DoctorPannal/PatientRecordAccess/PatientRecordView';
+import AddRecoard from './components/DoctorPannal/PatientRecordAccess/AddRecoard';
+import AllFiles from './components/DoctorPannal/PatientRecordAccess/AllFiles';
+import RecoardPrescriptionView from './components/DoctorPannal/PatientRecordAccess/RecoardPrescriptionView';
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* patient Dashboard Routes  */}
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<Forgot/>} />
@@ -53,6 +60,17 @@ function App() {
         <Route path='/payment-detail' element={<PayementDetail/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
         <Route path="/paidbill" element={<PaidBill />} />
+
+
+        {/* Doctoer Dashboard Routes  */}
+
+        <Route path='/doctorDashboard' element={<AppoinmentManagment/>}></Route>
+        <Route path='/patientRecord' element={<PatientRecordAccess/>}></Route>
+        <Route path='/patientRecordView' element={<PatientRecordView/>}></Route>
+        <Route path='/add-record' element={<AddRecoard/>}></Route>
+        <Route path='/all-files' element={<AllFiles/>}></Route>
+        <Route path='/RecordPrescription' element={<RecoardPrescriptionView/>}></Route>
+        
         </Routes>
     </Router>
   );

@@ -110,50 +110,6 @@ const PersonalHealthRecord = () => {
                     <img src={logo} alt="Logo" className="mb-4 w-60 h-30" />
                 </header>
                 <nav className="mt-4">
-                    {/* <ul>
-                        {menuItems.map((item) => (
-                            <li
-                                key={item.path}
-                                className={`mb-3 text-lg px-4 py-2 rounded-lg transition-shadow text[#00bfff] ${isActive(item.path) ? 'text[#00bfff] font-bold' : 'text-gray-400'}`}
-                                style={{
-                                    fontWeight: isActive(item.path) ? 'bold' : 'normal',
-                                    color: isActive(item.path) ? '#00bfff' : 'gray',
-                                }}
-                            >
-                                <div
-                                    onClick={item.subItems ? () => toggleDropdown(item.name) : undefined}
-                                    className="flex items-center gap-2 cursor-pointer text[#00bfff]"
-                                >
-                                    {item.icon}
-                                    {item.subItems ? (
-                                        <>
-                                            <span>{item.name}</span>
-                                            <FaChevronDown
-                                                className={`ml-auto transition-transform ${openDropdown === item.name ? 'rotate-180' : ''}`}
-                                            />
-                                        </>
-                                    ) : (
-                                        <Link to={item.path} className="flex items-center gap-2 text[#00bfff]">
-                                            {item.name}
-                                        </Link>
-                                    )}
-                                </div>
-
-                                {openDropdown === item.name && item.subItems && (
-                                    <ul className="pl-4 mt-2">
-                                        {item.subItems.map((subItem) => (
-                                            <li
-                                                key={subItem.path}
-                                                className={`mb-2 text-lg px-2 py-1 rounded-lg transition-shadow ${isActive(subItem.path) ? 'text[#00bfff] font-bold' : 'text-gray-400'}`}
-                                            >
-                                                <Link to={subItem.path}>{subItem.name}</Link>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </li>
-                        ))}
-                    </ul> */}
                     <ul>
     {menuItems.map((item) => (
         <li
