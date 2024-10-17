@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { RiHome2Line } from 'react-icons/ri';
-import { FaBell, FaChevronDown, FaCalendarAlt, FaEye } from 'react-icons/fa';
+import { FaBell, FaChevronDown, FaCalendarAlt, FaEye, FaHospitalUser, FaFileAlt } from 'react-icons/fa';
 import { FaBriefcaseMedical, FaCalendarCheck } from "react-icons/fa6";
 import { IoIosChatboxes } from "react-icons/io";
 import { MdWifiCalling } from "react-icons/md";
@@ -18,20 +18,19 @@ const PatientRecordAccess = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
 
     const menuItems = [
+        { path: '/doctorDashboard', name: 'Appointment Management', icon: <FaCalendarCheck /> },
+        { path: '/patientRecord', name: 'Patient Record Access', icon: <FaCalendarCheck /> },
         {
-            path: '/doctorDashboard', name: 'Appointment Management', icon: <FaCalendarAlt />,
+            path: '/create', name: 'Prescription Tool', icon: <FaHospitalUser />,
+            submenu: [
+                { path: '/create', name: 'Create' },
+                { path: '/manage', name: 'Manage' }
+            ]
         },
-        {
-            path: '/patientRecord', name: 'Patient Record Access', icon: <FaCalendarCheck />
-        },
-        {
-            path: '/tools', name: 'Prescription Tool', icon: <FaBriefcaseMedical />
-        },
-        {
-            path: '/module', name: 'Teleconsultation Module', icon: <MdWifiCalling />
-        },
+        { path: '/module', name: 'Teleconsultation Module', icon: <FaFileAlt /> },
         { path: '/chats', name: 'Chats', icon: <IoIosChatboxes /> },
     ];
+
 
     const toggleDropdown = (itemName) => {
         setOpenDropdown(openDropdown === itemName ? null : itemName);
@@ -99,7 +98,7 @@ const PatientRecordAccess = () => {
                         {menuItems.map((item) => (
                             <li
                                 key={item.path}
-                                className={`mb-3 text-lg px-4 py-2 rounded-lg transition-shadow ${isActive(item.path) ? 'text-[#00bfff] font-bold' : 'text-gray-400'}`}
+                                className={`mb-3 text-md px-4 py-2 rounded-lg transition-shadow ${isActive(item.path) ? 'text-[#00bfff] font-bold' : 'text-gray-400'}`}
                                 style={{
                                     fontWeight: isActive(item.path) ? 'bold' : 'normal',
                                     color: isActive(item.path) ? '#00bfff' : 'gray',
@@ -191,63 +190,65 @@ const PatientRecordAccess = () => {
                 </div>
 
                 {/* Record Table */}
-                <div className="p-6 text-center">
-                    <div className="flex justify-between items-center mb-4">
-                        <h1 className="text-2xl font-semibold">Patient Record Access</h1>
-                        <div className="flex items-center">
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                value={searchTerm}
-                                onChange={handleSearchChange}
-                                className="border rounded-full px-4 py-3 h-10 w-75"
-                            />
-                            <select
-                                className="ml-4 h-10 px-2 border rounded text-gray-500"
-                                value={filter}
-                                onChange={handleFilterChange}
-                            >
-                                <option value="Day">Today</option>
-                                <option value="Week">This Week</option>
-                                <option value="Month">This Month</option>
-                            </select>
+                <div className="flex-1  flex flex-col p-4">
+                    <div className="bg-white shadow-lg p-6 rounded-lg">
+                        <div className="flex justify-between items-center mb-4">
+                            <h1 className="text-2xl font-semibold">Patient Record Access</h1>
+                            <div className="flex items-center">
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    className="border rounded-full px-4 py-3 h-10 w-75"
+                                />
+                                <select
+                                    className="ml-4 h-10 px-2 border rounded text-gray-500"
+                                    value={filter}
+                                    onChange={handleFilterChange}
+                                >
+                                    <option value="Day">Today</option>
+                                    <option value="Week">This Week</option>
+                                    <option value="Month">This Month</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <table className="min-w-full">
-                        <thead>
-                            <tr className="bg-gray-200 ">
-                                <th className=" px-4 py-2">Patient Name</th>
-                                <th className=" px-4 py-2">Disease</th>
-                                <th className=" px-4 py-2">Patient Issue</th>
-                                <th className=" px-4 py-2">Last Appoinment Date</th>
-                                <th className=" px-4 py-2">Last Appoinment Time</th>
-                                <th className=" px-4 py-2">Age</th>
-                                <th className=" px-4 py-2">Gender</th>
-                                <th className=" px-4 py-2">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredPatients.map((patient, index) => (
-                                <tr key={index} className='border-b border-gray-300 mt-4'>
-                                    <td className=" px-4 py-2">{patient.name}</td>
-                                    <td className=" px-4 py-2">{patient.disease}</td>
-                                    <td className=" px-4 py-2">{patient.issue}</td>
-                                    <td className=" px-4 py-2">{patient.date}</td>
-                                    <div className="text-gray-900 px-4 py-2">{formatCurrentTime(currentTime)}</div>
-
-                                    <td className=" px-4 py-2">{patient.age}</td>
-                                    <td className=" px-4 py-2">{patient.gender}</td>
-                                    <td className=" px-4 py-2">
-                                        <FaEye
-                                            className="w-7 h-7 cursor-pointer transition-colors duration-300 text-gray-500 hover:text-[#00bfff] p-1"
-                                            onClick={() => navigate('/patientRecordView', { state: { patient } })}
-                                        />
-                                    </td>
+                        <table className="min-w-full">
+                            <thead>
+                                <tr className="bg-gray-200 ">
+                                    <th className=" px-4 py-2">Patient Name</th>
+                                    <th className=" px-4 py-2">Disease</th>
+                                    <th className=" px-4 py-2">Patient Issue</th>
+                                    <th className=" px-4 py-2">Last Appoinment Date</th>
+                                    <th className=" px-4 py-2">Last Appoinment Time</th>
+                                    <th className=" px-4 py-2">Age</th>
+                                    <th className=" px-4 py-2">Gender</th>
+                                    <th className=" px-4 py-2">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {filteredPatients.map((patient, index) => (
+                                    <tr key={index} className='border-b border-gray-300 mt-4'>
+                                        <td className=" px-4 py-2">{patient.name}</td>
+                                        <td className=" px-4 py-2">{patient.disease}</td>
+                                        <td className=" px-4 py-2">{patient.issue}</td>
+                                        <td className=" px-4 py-2">{patient.date}</td>
+                                        <div className="text-gray-900 px-4 py-2">{formatCurrentTime(currentTime)}</div>
+
+                                        <td className=" px-4 py-2">{patient.age}</td>
+                                        <td className=" px-4 py-2">{patient.gender}</td>
+                                        <td className=" px-4 py-2">
+                                            <FaEye
+                                                className="w-7 h-7 cursor-pointer transition-colors duration-300 text-gray-500 hover:text-[#00bfff] p-1"
+                                                onClick={() => navigate('/patientRecordView', { state: { patient } })}
+                                            />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ const RecoardPrescriptionView = () => {
         if (onDelete) {
             onDelete(doctor.id);
         }
-        navigate('/add-record');
+        navigate('/patientRecord');
     };
 
     return (

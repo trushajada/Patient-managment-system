@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { RiHome2Line } from 'react-icons/ri';
-import { FaBell, FaCalendarAlt, FaEye } from 'react-icons/fa';
+import { FaBell, FaCalendarAlt, FaEye ,FaHospitalUser, FaFileAlt} from 'react-icons/fa';
 import { FaBriefcaseMedical, FaCalendarCheck } from "react-icons/fa6";
 import { IoIosChatboxes } from "react-icons/io";
 import { MdWifiCalling } from "react-icons/md";
@@ -17,12 +17,19 @@ const AllFiles = () => {
     const { savedRecords } = location.state || { savedRecords: [] };
 
     const menuItems = [
-        { path: '/doctorDashboard', name: 'Appointment Management', icon: <FaCalendarAlt /> },
+        { path: '/doctorDashboard', name: 'Appointment Management', icon: <FaCalendarCheck /> },
         { path: '/patientRecord', name: 'Patient Record Access', icon: <FaCalendarCheck /> },
-        { path: '/tools', name: 'Prescription Tool', icon: <FaBriefcaseMedical /> },
-        { path: '/module', name: 'Teleconsultation Module', icon: <MdWifiCalling /> },
+        {
+            path: '/create', name: 'Prescription Tool', icon: <FaHospitalUser />,
+            submenu: [
+                { path: '/create', name: 'Create' },
+                { path: '/manage', name: 'Manage' }
+            ]
+        },
+        { path: '/module', name: 'Teleconsultation Module', icon: <FaFileAlt /> },
         { path: '/chats', name: 'Chats', icon: <IoIosChatboxes /> },
     ];
+
 
     const prescriptionDetails = [
         { label: "Hospital Name", value: "Medical Center" },

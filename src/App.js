@@ -30,6 +30,13 @@ import PatientRecordView from './components/DoctorPannal/PatientRecordAccess/Pat
 import AddRecoard from './components/DoctorPannal/PatientRecordAccess/AddRecoard';
 import AllFiles from './components/DoctorPannal/PatientRecordAccess/AllFiles';
 import RecoardPrescriptionView from './components/DoctorPannal/PatientRecordAccess/RecoardPrescriptionView';
+import ToolsCreate from './components/DoctorPannal/PrescriptionTools/ToolsCreate';
+import PatientDocument from './components/DoctorPannal/PrescriptionTools/PatientDocument';
+import PatientPrescription from './components/DoctorPannal/PrescriptionTools/PatientPrescription';
+import PatientDescription from './components/DoctorPannal/PrescriptionTools/PatientDescription';
+import CreatePrescription from './components/DoctorPannal/PrescriptionTools/CreatePrescription';
+import ManageTodayPre from './components/DoctorPannal/PrescriptionTools/ManageTodayPre';
+import OlderPrescription from './components/DoctorPannal/PrescriptionTools/OlderPrescription';
 
 function App() {
   return (
@@ -38,7 +45,7 @@ function App() {
         {/* patient Dashboard Routes  */}
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<Forgot/>} />
+        <Route path="/forgot-password" element={<Forgot />} />
         <Route path='/dashboard' element={<PersonalHealthReacord />}></Route>
         <Route path="/all-Appoinment" element={<AllAppointments />} />
         <Route path='/edit-profile' element={<EditProfile />}></Route>
@@ -47,31 +54,37 @@ function App() {
         <Route path='/report' element={<TestReport />}></Route>
         <Route path='/reportdownload' element={<Reportdownload />}></Route>
         <Route path='/history' element={<MedicalHistory />}></Route>
-        <Route path='/documnet' element={<AllDocument/>}></Route>
-        <Route path='/allprescription' element={<Allprescription/>}></Route>
-        <Route path='/description' element={<AllDiscription/>}></Route>
-        <Route path='/records' element={<PrescriptionAccess/>}></Route>
-        <Route path='/Accessdownload' element={<Accessdownload/>}></Route>
-        <Route path='/chats' element={<Chat/>}></Route>
+        <Route path='/documnet' element={<AllDocument />}></Route>
+        <Route path='/allprescription' element={<Allprescription />}></Route>
+        <Route path='/description' element={<AllDiscription />}></Route>
+        <Route path='/records' element={<PrescriptionAccess />}></Route>
+        <Route path='/Accessdownload' element={<Accessdownload />}></Route>
+        <Route path='/chats' element={<Chat />}></Route>
         <Route path="/bills" element={<UnpaidBill />} />
         <Route path="/billrecipt" element={<BillRecipt />} />
-        <Route path='/paytype' element={<Paytype/>}></Route>
-        <Route path='/payment-method' element={<PayMethod/>}></Route>
-        <Route path='/payment-detail' element={<PayementDetail/>}></Route>
-        <Route path='/payment' element={<Payment/>}></Route>
+        <Route path='/paytype' element={<Paytype />}></Route>
+        <Route path='/payment-method' element={<PayMethod />}></Route>
+        <Route path='/payment-detail' element={<PayementDetail />}></Route>
+        <Route path='/payment' element={<Payment />}></Route>
         <Route path="/paidbill" element={<PaidBill />} />
 
 
         {/* Doctoer Dashboard Routes  */}
 
-        <Route path='/doctorDashboard' element={<AppoinmentManagment/>}></Route>
-        <Route path='/patientRecord' element={<PatientRecordAccess/>}></Route>
-        <Route path='/patientRecordView' element={<PatientRecordView/>}></Route>
-        <Route path='/add-record' element={<AddRecoard/>}></Route>
-        <Route path='/all-files' element={<AllFiles/>}></Route>
-        <Route path='/RecordPrescription' element={<RecoardPrescriptionView/>}></Route>
-        
-        </Routes>
+        <Route path='/doctorDashboard' element={<AppoinmentManagment />}></Route>
+        <Route path='/patientRecord' element={<PatientRecordAccess />}></Route>
+        <Route path='/patientRecordView' element={<PatientRecordView />}></Route>
+        <Route path='/add-record' element={<AddRecoard />}></Route>
+        <Route path='/all-files' element={<AllFiles />}></Route>
+        <Route path='/RecordPrescription' element={<RecoardPrescriptionView />}></Route>
+        <Route path='/create' element={<ToolsCreate />}></Route>
+        <Route path='/patientdocument' element={<PatientDocument />}></Route>
+        <Route path='/patientprescription' element={<PatientPrescription/>}></Route>
+        <Route path='/patientdescription' element={<PatientDescription/>}></Route>
+        <Route path="/create-prescription" element={<CreatePrescription />} />
+        <Route path='/manage' element={<ManageTodayPre/>}></Route>
+        <Route path="/older" element={<OlderPrescription />} />
+      </Routes>
     </Router>
   );
 }
