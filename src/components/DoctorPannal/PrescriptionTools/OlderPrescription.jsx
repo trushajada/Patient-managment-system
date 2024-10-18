@@ -163,12 +163,12 @@ const OlderPrescription = () => {
                             <tbody>
     {filteredpatientsolder.map((patientsolder, index) => (
         <tr key={index} className='border-b border-gray-300 mt-4'>
-            <td className="py-3 px-6 text-left">{patientsolder.name}</td> {/* Changed patient to patientstoday */}
-            <td className="py-3 px-6 text-left">{patientsolder.number}</td> {/* Changed patient to patientstoday */}
-            <td className="py-3 px-6 text-left">{patientsolder.type}</td> {/* Changed patient to patientstoday */}
-            <td className="py-3 px-6 text-left">{patientsolder.time}</td> {/* Changed patient to patientstoday */}
-            <td className="py-3 px-6 text-left">{patientsolder.age}</td> {/* Changed patient to patientstoday */}
-            <td className="py-3 px-6 text-left">{patientsolder.gender}</td> {/* Changed patient to patientstoday */}
+            <td className="py-3 px-6 text-left">{patientsolder.name}</td> 
+            <td className="py-3 px-6 text-left">{patientsolder.number}</td> 
+            <td className="py-3 px-6 text-left">{patientsolder.type}</td> 
+            <td className="py-3 px-6 text-left">{patientsolder.time}</td> 
+            <td className="py-3 px-6 text-left">{patientsolder.age}</td> 
+            <td className="py-3 px-6 text-left">{patientsolder.gender}</td>
             <td className="py-3 px-6 text-left">
                 <FaEye
                     className="w-7 h-7 cursor-pointer transition-colors duration-300 text-gray-500 hover:text-[#00bfff] p-1"

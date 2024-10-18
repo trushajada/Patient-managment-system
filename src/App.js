@@ -24,7 +24,6 @@ import PayMethod from './components/Bills/PayMethod';
 import PayementDetail from './components/Bills/PayementDetail';
 import Payment from './components/Bills/Payment';
 import PaidBill from './components/Bills/PaidBill';
-import AppoinmentManagment from './components/DoctorPannal/AppoinmentManagment';
 import PatientRecordAccess from './components/DoctorPannal/PatientRecordAccess/PatientRecordAccess';
 import PatientRecordView from './components/DoctorPannal/PatientRecordAccess/PatientRecordView';
 import AddRecoard from './components/DoctorPannal/PatientRecordAccess/AddRecoard';
@@ -37,6 +36,17 @@ import PatientDescription from './components/DoctorPannal/PrescriptionTools/Pati
 import CreatePrescription from './components/DoctorPannal/PrescriptionTools/CreatePrescription';
 import ManageTodayPre from './components/DoctorPannal/PrescriptionTools/ManageTodayPre';
 import OlderPrescription from './components/DoctorPannal/PrescriptionTools/OlderPrescription';
+import AppointmentManagment from './components/DoctorPannal/AppoinmentManager/AppoinmentManagment';
+import AppoinmentTimeSloat from './components/DoctorPannal/AppoinmentManager/AppoinmentTimeSloat';
+import EditTime from './components/DoctorPannal/AppoinmentManager/EditTime';
+import DeleteTime from './components/DoctorPannal/AppoinmentManager/DeleteTime';
+import UpcomingAppoinment from './components/DoctorPannal/AppoinmentManager/UpcomingAppoinment';
+import PreviousAppoinment from './components/DoctorPannal/AppoinmentManager/PreviousAppoinment';
+import CancleAppoinment from './components/DoctorPannal/AppoinmentManager/CancleAppoinment';
+import CanclePage from './components/DoctorPannal/AppoinmentManager/CanclePage';
+import PaymentManagment from './components/DoctorPannal/AppoinmentManager/PaymentManagment';
+import Paymethoddetail from './components/DoctorPannal/AppoinmentManager/Paymethoddetail';
+import PaymentSucc from './components/DoctorPannal/AppoinmentManager/AppoinmentSucc';
 
 function App() {
   return (
@@ -71,7 +81,7 @@ function App() {
 
         {/* Doctoer Dashboard Routes  */}
 
-        <Route path='/doctorDashboard' element={<AppoinmentManagment />}></Route>
+        <Route path='/doctorDashboard' element={<AppointmentManagment/>}></Route>
         <Route path='/patientRecord' element={<PatientRecordAccess />}></Route>
         <Route path='/patientRecordView' element={<PatientRecordView />}></Route>
         <Route path='/add-record' element={<AddRecoard />}></Route>
@@ -84,7 +94,18 @@ function App() {
         <Route path="/create-prescription" element={<CreatePrescription />} />
         <Route path='/manage' element={<ManageTodayPre/>}></Route>
         <Route path="/older" element={<OlderPrescription />} />
-      </Routes>
+        <Route path='/appointment-time-slot' element={<AppoinmentTimeSloat/>}></Route>
+        <Route path='/edit' element={<EditTime/>}></Route>
+        <Route path='/deletedtimeslot' element={<DeleteTime/>}></Route>
+        <Route path='upcoming' element={<UpcomingAppoinment/>}></Route>
+        <Route path='/Previous' element={<PreviousAppoinment/>}></Route>
+        <Route path='/cancle' element={<CancleAppoinment/>}></Route>
+        <Route path='/CancleAppoinment' element={<CanclePage/>}></Route>
+        <Route path='/paymentmethod' element={<PaymentManagment/>}></Route>
+        <Route path='/paymethod-detail' element={<Paymethoddetail/>}></Route>
+        <Route path='/Apposucssess' element={<PaymentSucc/>}></Route>
+        
+      </Routes> 
     </Router>
   );
 }
