@@ -66,7 +66,6 @@ const UpcomingAppoinment = () => {
   };
 
   const handleEdit = (index) => {
-    // Logic for editing (can include opening a modal to edit details)
     console.log("Editing appointment at index:", index);
   };
 
@@ -74,7 +73,7 @@ const UpcomingAppoinment = () => {
     navigate('/login');
   };
   const handleNavigateToTimeSlot = () => {
-    navigate('/appointment-time-slot'); // Change this to the actual path for your appointment time slot page
+    navigate('/appointment-time-slot'); 
   };
 
   return (

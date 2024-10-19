@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { RiHome2Line, RiLogoutBoxRFill } from 'react-icons/ri';
 import { FaBell, FaChevronDown, FaCalendarCheck, FaHospitalUser, FaFileAlt } from 'react-icons/fa';
@@ -8,42 +8,34 @@ import sidebar from '../../../assets/images/sidebar.png';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import dayjs from 'dayjs';
 
-
-const AppoinmentTimeSloat = ({ timeSlot }) => {
+const ResshedualTime = ({ isModalOpen, closeModal, currentAppointment, handleReschedule }) => {
     const [headerSearchTerm, setHeaderSearchTerm] = useState('');
     const [openDropdown, setOpenDropdown] = useState(null);
     const navigate = useNavigate();
     const [startDate, setStartDate] = useState(dayjs('2022-06-18'));
     const [endDate, setEndDate] = useState(dayjs('2022-06-23'));
     const [modalOpen, setModalOpen] = useState(false);
-    const [selectedTime, setSelectedTime] = useState(timeSlot);
+    const [selectedTime, setSelectedTime] = useState('');
     const location = useLocation();
+    const [showModal, setShowModal] = useState(false);
+    const [selectedDate, setSelectedDate] = useState("18 June, 2022");
+    const [selectedTimes, setSelectedTimes] = useState("03:00 PM - 04:00 PM");
+    const [editDate, setEditDate] = useState('');
+    const [editTime, setEditTime] = useState('');
 
+    const onReschedule = () => {
+        console.log('Rescheduling to:', editDate, editTime);
+        navigate('/reminder', {
+            state: { date: editDate, time: editTime },
+        });
 
-
+    };
     const toggleBox = (timeSlot) => {
         setSelectedTime(timeSlot);
         setModalOpen(true);
     };
     const handleTimeSlotClick = (slot) => {
         toggleBox(slot);
-    };
-
-    const closeModal = () => {
-        setModalOpen(false);
-    };
-
-    const handleEdit = () => {
-        navigate(`/edit`, { state: { timeSlot: selectedTime } });
-    };
-
-    const handleDelete = () => {
-        console.log(`Deleting time slot: ${selectedTime}`);
-        navigate('/deletedtimeslot')
-    };
-    const handleCancle = () => {
-        console.log(`Deleting time slot: ${selectedTime}`);
-        navigate('/CancleAppoinment')
     };
 
     const handlePrevious = () => {
@@ -55,7 +47,6 @@ const AppoinmentTimeSloat = ({ timeSlot }) => {
         setStartDate(prev => prev.add(7, 'day'));
         setEndDate(prev => prev.add(7, 'day'));
     };
-
 
     const menuItems = [
         { path: '/doctorDashboard', name: 'Appointment Management', icon: <FaCalendarCheck /> },
@@ -77,10 +68,10 @@ const AppoinmentTimeSloat = ({ timeSlot }) => {
 
     const isActive = (path) => location.pathname === path;
 
-
     const handleLogout = () => {
         navigate('/login');
     };
+
     const timeSlots = [
         '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
         '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM',
@@ -140,8 +131,8 @@ const AppoinmentTimeSloat = ({ timeSlot }) => {
                 <div className="flex items-center justify-between p-4 h-24 mb-6 bg-white">
                     <div className="flex items-center">
                         <RiHome2Line className="text-gray-500 h-6 w-6 mr-2" />
-                        <span style={{ color: "#00bfff " }} className='font-semibold'>
-                            {menuItems.find(item => item.path === location.pathname)?.name || 'Appoinment Management'}
+                        <span style={{ color: "#00bfff" }} className='font-semibold'>
+                            {menuItems.find(item => item.path === location.pathname)?.name || 'Teleconsultation Module'}
                         </span>
                     </div>
                     <div className="flex items-center justify-end w-[calc(70%-30px)]">
@@ -167,19 +158,19 @@ const AppoinmentTimeSloat = ({ timeSlot }) => {
 
                 <div className="flex-1 flex flex-col p-4">
                     <div className="bg-white shadow-lg p-6 rounded-lg">
-                        <h1 className='text-xl font-semibold'>Appoinment Time Slot</h1>
+                        <h1 className='text-xl font-semibold'>Appointment Time Slot</h1>
                         <div className="flex items-center justify-center mt-6 bg-gray-100 ">
                             <h1 className="p-3 text-center mx-4 text-[#00bfff] flex items-center">
-                                <FaArrowLeft className="mr-2" onClick={handlePrevious} />
+                                <FaArrowLeft className="mr-2 cursor-pointer" onClick={handlePrevious} />
                                 {startDate.format('DD MMM, YYYY')} - {endDate.format('DD MMM, YYYY')}
-                                <FaArrowRight className="ml-2" onClick={handleNext} />
+                                <FaArrowRight className="ml-2 cursor-pointer" onClick={handleNext} />
                             </h1>
                         </div>
                         <div>
                             <table className="min-w-full border-collapse">
                                 <thead>
                                     <tr>
-                                    <th className="py-2 px-4 border-b">Time</th>
+                                        <th className="py-2 px-4 border-b">Time</th>
                                         <th className="py-2 px-4 border-b">Sun 17</th>
                                         <th className="py-2 px-4 border-b">Mon 18</th>
                                         <th className="py-2 px-4 border-b">Tue 19</th>
@@ -187,6 +178,7 @@ const AppoinmentTimeSloat = ({ timeSlot }) => {
                                         <th className="py-2 px-4 border-b">Thu 21</th>
                                         <th className="py-2 px-4 border-b">Fri 22</th>
                                         <th className="py-2 px-4 border-b">Sat 23</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -203,30 +195,51 @@ const AppoinmentTimeSloat = ({ timeSlot }) => {
                                             <tr key={index}>
                                                 <td className="py-2 px-4 border-b text-center text-[#00bfff] font-semibold">{timeLabel}</td>
                                                 <td
-                                                    className={`py-2 px-4 text-center ${isHighlightTime1 ? 'bg-gray-100 text-black font-bold shadow-sm' : 'text-gray-200'}`}
+                                                    className={`py-2 px-4 text-center ${isHighlightTime1 ? 'bg-[#00bfff] text-white text-black font-bold shadow-sm' : 'text-gray-200'}`}
                                                     onClick={() => handleTimeSlotClick(timeLabel)}
                                                 >
-                                                    {timeLabel === '3:00 PM' ? <div>Skin Treatment</div> : <div>3:00 PM - 4:00 PM</div>}
+                                                    {timeLabel === '3:00 PM' ? (
+                                                        <div>3:00 PM - 4:00 PM</div>
+                                                    ) : timeLabel === '4:00 PM' ? (
+                                                        <div>Skin Tratment</div>
+                                                    ) : (
+                                                        <div>No Schedule</div>
+                                                    )}
                                                 </td>
                                                 <td
-                                                    className={`py-2 px-4 text-center ${isHighlightTime ? 'bg-[#00bfff] text-white font-bold' : 'text-gray-200'}`}
+                                                    className={`py-2 px-4 text-center ${isHighlightTime ? ' font-bold bg-gray-100 text-black font-bold shadow-sm' : 'text-gray-200'}`}
                                                     onClick={() => handleTimeSlotClick(timeLabel)}
                                                 >
-                                                    {timeLabel === '9:00 AM' ? '9:00 AM - 10:00 AM' : timeLabel === '10:00 AM' ? '' : 'No Schedule'}
+                                                    {timeLabel === '9:00 AM' ? 'no schedule' : timeLabel === '10:00 AM' ? '' : 'No Schedule'}
                                                 </td>
                                                 <td
                                                     className={`py-2 px-4 text-center ${isHighlightTime3 ? 'bg-gray-100 text-black font-bold shadow-sm' : 'text-gray-200'}`}
                                                     onClick={() => handleTimeSlotClick(timeLabel)}
                                                 >
-                                                    {timeLabel === '7:00 PM' ? <div>Hair Treatment</div> : <div>7:00 PM - 8:00 PM</div>}
+                                                    {timeLabel === '7:00 PM' ? (
+                                                        <div>7:00 PM - 8:00 PM</div>
+                                                    ) : timeLabel === '8:00 PM' ? (
+                                                        <div>Hair Tratment</div>
+                                                    ) : (
+                                                        <div>No Schedule</div>
+                                                    )}
                                                 </td>
+
                                                 <td className="py-2 px-4 border-b text-center text-gray-200">No Schedule</td>
                                                 <td
                                                     className={`py-2 px-4 text-center ${isHighlightTime2 ? 'bg-gray-100 text-black font-bold shadow-sm' : 'text-gray-200'}`}
                                                     onClick={() => handleTimeSlotClick(timeLabel)}
                                                 >
-                                                    {timeLabel === '6:00 PM' ? <div>Brain Tumor</div> : <div>6:00 PM - 7:00 PM</div>}
+                                                    {timeLabel === '6:00 PM' ? (
+                                                        <div>6:00 PM - 7:00 PM</div>
+                                                    ) : timeLabel === '7:00 PM' ? (
+                                                        <div>Brain tumor</div>
+                                                    ) : (
+                                                        <div>No Schedule</div>
+                                                    )}
                                                 </td>
+
+
                                                 <td className="py-2 px-4 border-b text-center text-gray-200">No Schedule</td>
                                                 <td className="py-2 px-4 border-b text-center text-gray-200">No Schedule</td>
                                             </tr>
@@ -234,30 +247,44 @@ const AppoinmentTimeSloat = ({ timeSlot }) => {
                                     })}
                                 </tbody>
                             </table>
-
-                            {/* Modal */}
-                            {modalOpen && (
-                                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                                    <div className="bg-white p-6 rounded-lg shadow-lg w-[500px]">
-                                        <h2 className="text-lg font-bold">Not Avaliable</h2>
-                                        <p className="mt-2 mb-3">Monday 18 jun,2022: {selectedTime}</p>
-                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit in nobis nostrum ullam animi rem.</p>
-                                        <div className="flex justify-end mt-4">
-                                            <button onClick={handleEdit} className="bg-green-500 text-white px-4 py-2 rounded mr-2">Edit</button>
-                                            <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded mr-2">Delete</button>
-                                            <button onClick={handleCancle} className="bg-blue-500 text-white px-4 py-2 rounded mr-2">Cancle Appoinment</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-
                         </div>
-
                     </div>
                 </div>
             </div>
+
+            {modalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white rounded-lg p-6 w-96">
+                        <h2 className="text-xl font-bold mb-4">Reschedule Appointment</h2>
+                        <div>
+                            <label className="block mb-2">New Date</label>
+                            <input
+                                type="date"
+                                value={editDate}
+                                onChange={(e) => setEditDate(e.target.value)}
+                                className="border border-gray-300 rounded-md p-2 w-full mb-4"
+                            />
+                            <label className="block mb-2">New Time</label>
+                            <select
+                                value={editTime}
+                                onChange={(e) => setEditTime(e.target.value)}
+                                className="border border-gray-300 rounded-md p-2 w-full mb-4"
+                            >
+                                <option value="">Select Time</option>
+                                {timeSlots.map((time) => (
+                                    <option key={time} value={time}>{time}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="flex justify-end">
+                            <button onClick={onReschedule} className="bg-blue-500 text-white py-2 px-4 rounded-md">Reschedule</button>
+                            <button onClick={() => setModalOpen(false)} className="bg-gray-200 text-black py-2 px-4 rounded-md ml-2">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-export default AppoinmentTimeSloat;
+export default ResshedualTime;

@@ -47,6 +47,12 @@ import CanclePage from './components/DoctorPannal/AppoinmentManager/CanclePage';
 import PaymentManagment from './components/DoctorPannal/AppoinmentManager/PaymentManagment';
 import Paymethoddetail from './components/DoctorPannal/AppoinmentManager/Paymethoddetail';
 import PaymentSucc from './components/DoctorPannal/AppoinmentManager/AppoinmentSucc';
+import SchedualAppoinment from './components/DoctorPannal/TeleconsulationAccess/SchedualAppoinment';
+import PreAppoinment from './components/DoctorPannal/TeleconsulationAccess/PreAppoinment';
+import CanAppoinments from './components/DoctorPannal/TeleconsulationAccess/CanAppoinments';
+import PenddingAppoinment from './components/DoctorPannal/TeleconsulationAccess/PenddingAppoinment';
+import ResshedualTime from './components/DoctorPannal/TeleconsulationAccess/ResshedualTime';
+import ReminderPage from './components/DoctorPannal/TeleconsulationAccess/ReminderPage';
 
 function App() {
   return (
@@ -104,7 +110,12 @@ function App() {
         <Route path='/paymentmethod' element={<PaymentManagment/>}></Route>
         <Route path='/paymethod-detail' element={<Paymethoddetail/>}></Route>
         <Route path='/Apposucssess' element={<PaymentSucc/>}></Route>
-        
+        <Route path='/module' element={<SchedualAppoinment/>}></Route>
+        <Route path='/Previousappo' element={<PreAppoinment/>}></Route>
+        <Route path='/Cancleappo' element={<CanAppoinments/>}></Route>
+        <Route path='/pendding' element={<PenddingAppoinment/>}></Route>
+        <Route path='/residual-timeslot' element={<ResshedualTime/>}></Route>
+        <Route path='/reminder' element={<ReminderPage/>}></Route>
       </Routes> 
     </Router>
   );
